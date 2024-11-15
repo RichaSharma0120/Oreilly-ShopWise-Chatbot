@@ -20,7 +20,7 @@ def generate_response(query: str, model_name: str) -> Dict[str, Any]:
             verbose=True,
             agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
             allow_dangerous_code=True,
-            handle_parsing_errors=True,
+            # handle_parsing_errors=True,
             max_iterations=3,  
             early_stopping_method="force"
         )
