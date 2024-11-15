@@ -29,7 +29,7 @@ const generateSessionId = () => {
 };
 
 const App = () => {
-  const url_machine = process.env.NEXT_PUBLIC_MONGO_URL;
+  const url_machine = process.env.NEXT_PUBLIC_URL;
 
   const [sessionId, setSessionId] = useState(""); // for session
   const [inputText, setInputText] = useState("");
@@ -62,7 +62,7 @@ const App = () => {
   const [userEmail, setUserEmail] = useState("");
 
   // state to handle selected model
-  const [selectedModel, setSelectedModel] = useState("Llama");
+  const [selectedModel, setSelectedModel] = useState("OpenAI");
 
   // check for stored email address in session storage.
   useEffect(() => {
@@ -214,6 +214,7 @@ const App = () => {
         let queryParams = {
           queryText: inputText,
           name: userName,
+          model_name: selectedModel
         };
         console.log(queryParams);
         let url;
@@ -395,9 +396,8 @@ const App = () => {
               onChange={(event) => setSelectedModel(event.target.value)}
               value={selectedModel}
             >
-              <option value="Llama">Llama</option>
-              <option value="GPT4ALL">GPT4ALL</option>
               <option value="OpenAI">OpenAI</option>
+              <option value="Mistral">Mistral</option>
             </select>
           </div>
 
@@ -456,7 +456,7 @@ const App = () => {
                     : "./images/shopwise-white-text-transparent-background.png"
                 }
                 alt="valtech logo"
-                style={{ width: "100px" }}
+                style={{ width: "200px" }}
               />
             </div>
             <div className="profile_section">

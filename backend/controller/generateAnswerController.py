@@ -29,10 +29,10 @@ class QuestionAnswer(BaseModel):
     name: Optional[str] = None
 
 @generateAnswerRouter.post('/generate_answer')
-async def generate_answer(queryText: str, name: str = None):
+async def generate_answer(queryText: str, name: str = None, model_name : str = None):
     try:
         print("\nin try block of generate answer controller")
-        answer = generate_response(queryText)
+        answer = generate_response(queryText, model_name)
         
         # Convert UTC time to IST
         ist_timezone = pytz.timezone('Asia/Kolkata')

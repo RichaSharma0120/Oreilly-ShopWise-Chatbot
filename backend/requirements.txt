@@ -5,3 +5,5 @@ langchain-community
 gpt4all
 llama-cpp-python
 fastapi
+ctransformers
+ctransformers[cuda]
