@@ -3,7 +3,7 @@ from typing import Dict, Any, List
 from langchain_experimental.agents import create_csv_agent
 from langchain.agents import AgentType
 import pandas as pd
-from llm import openai_llm, mistral_llm
+from llms import openai_llm, mistral_llm
 def generate_response(query: str, model_name: str) -> Dict[str, Any]:
 
     models = {"Mistral" : mistral_llm, 
@@ -20,7 +20,7 @@ def generate_response(query: str, model_name: str) -> Dict[str, Any]:
             verbose=True,
             agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
             allow_dangerous_code=True,
-            # handle_parsing_errors=True,
+            handle_parsing_errors=True,
             max_iterations=3,  
             early_stopping_method="force"
         )
