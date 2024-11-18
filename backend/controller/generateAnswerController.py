@@ -24,21 +24,19 @@ class QuestionAnswer(BaseModel):
     question: str
     answer: str
     stars_given: int = 0
-    feedback: Optional[str] = None
     created_at: datetime
     name: Optional[str] = None
 
 @generateAnswerRouter.post('/generate_answer')
-async def generate_answer(queryText: str, name: str = None):
+async def generate_answer(queryText: str, name: str = None, modelName: str = None):
     try:
         print("\nin try block of generate answer controller")
-        answer = generate_response(queryText)
+        # answer = generate_response(queryText, modelName)
+        answer = generate_response(queryText, modelName)
         
-        # Convert UTC time to IST
         ist_timezone = pytz.timezone('Asia/Kolkata')
         current_time_ist = datetime.now(timezone.utc).astimezone(ist_timezone)
         
-        # Remove timezone info to prevent MongoDB from converting to UTC
         current_time_naive = current_time_ist.replace(tzinfo=None)
         
         # Create QuestionAnswer instance
@@ -72,3 +70,6 @@ async def generate_answer(queryText: str, name: str = None):
     except Exception as e:
         print(f"Error in agent query controller: {str(e)}")
         raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {str(e)}")
+
+
+

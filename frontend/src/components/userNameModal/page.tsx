@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./usernameModal.module.css";
 
-const UserNameModal = ({ onClose, onEmailSave }) => {
+const UserNameModal = ({ onClose, onUserNameSave }) => {
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const UserNameModal = ({ onClose, onEmailSave }) => {
 
     if (userName) {
       sessionStorage.setItem('userName', userName);
-      onEmailSave(userName);
+      onUserNameSave(userName);
       onClose();
   };
 }

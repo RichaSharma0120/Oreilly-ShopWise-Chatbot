@@ -5,10 +5,7 @@ import "./styles.css"; // Import CSS file for styling
 import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faAngleDown,
-  faAngleUp,
   faCheck,
-  faClose,
   faStop,
   faUser,
   faVolumeHigh,
@@ -20,7 +17,8 @@ import { ThreeDots } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import DownArrowButton from "./DownArrowButton";
 import Stars from "@/components/feedback/stars";
-import UserNameModal from "../components/emailModal/page";
+import UserNameModal from "../components/userNameModal/page";
+import Image from "next/image";
 
 const generateSessionId = () => {
   const timestamp = Date.now().toString();
@@ -29,18 +27,14 @@ const generateSessionId = () => {
 };
 
 const App = () => {
-  const url_machine = process.env.NEXT_PUBLIC_MONGO_URL;
+  const url_machine = process.env.NEXT_PUBLIC_URL;
 
-  const [sessionId, setSessionId] = useState(""); // for session
+  const [sessionId, setSessionId] = useState(""); 
   const [inputText, setInputText] = useState("");
   const [chatData, setChatData] = useState([]);
-  const [projectSelected, setProjectSelected] = useState("P&G");
-  const [openUploadPopUp, setShowUploadPopUp] = useState(false);
-  const [toggleReferences, setToggleReferences] = useState(false);
   const [copiedReference, setCopiedReference] = useState(null);
   const [mainAnswerCopied, setMainAnswerCopied] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const [utility, setUtility] = useState({
     toggleCopy: false,
     toggleReadAloud: false,
@@ -59,26 +53,23 @@ const App = () => {
   // handling email model popup for adding username
   const [showModal, setShowModal] = useState(false);
   const [userName, setUserName] = useState("");
-  const [userEmail, setUserEmail] = useState("");
 
   // state to handle selected model
-  const [selectedModel, setSelectedModel] = useState("Llama");
+  const [selectedModel, setSelectedModel] = useState("OpenAI");
 
-  // check for stored email address in session storage.
+  // check for stored userName address in session storage.
   useEffect(() => {
     const storedUserName = sessionStorage.getItem("userName");
     if (!storedUserName) {
       setShowModal(true);
     } else {
       setUserName(storedUserName);
-      setUserEmail(storedUserName);
     }
   }, []);
 
-  // saving email address
-  const handleEmailSave = (name) => {
+  // saving userNAme address
+  const handleUserName = (name) => {
     setUserName(name.split("@")[0]);
-    setUserEmail(name);
   };
 
   useEffect(() => {
@@ -189,20 +180,7 @@ const App = () => {
     }
   };
 
-  const handleCancel = () => {
-    if (fileInputRef.current.value === "") {
-      handleCloseModal();
-    }
-    fileInputRef.current.value = "";
-  };
 
-  const handleCloseModal = () => {
-    setShowUploadPopUp(false);
-  };
-
-  const openPopUp = () => {
-    setShowUploadPopUp(true);
-  };
 
   const handleQuerySubmit = async (event) => {
     event.preventDefault();
@@ -214,16 +192,10 @@ const App = () => {
         let queryParams = {
           queryText: inputText,
           name: userName,
+          modelName: selectedModel
         };
         console.log(queryParams);
-        let url;
-        // if (projectSelected === "Service Now") {
-        //   url = `http://${url_machine}/generate_servicenow_answer`;
-        // } else {
-        //   url = `http://${url_machine}/generate_answer`;
-        // }
-
-        url = `http://${url_machine}/generate_answer`;
+        let url = `http://${url_machine}/generate_answer`;
 
         const response = await axios.post(url, null, {
           params: queryParams,
@@ -258,112 +230,6 @@ const App = () => {
     }
   };
 
-  const fileInputRef = useRef(null);
-
-  const handleFileUpload = async (event) => {
-    event.preventDefault();
-    const files = fileInputRef.current.files;
-    console.log("file ", files);
-    if (!files) {
-      console.error("No file selected");
-      // You can add user feedback here, e.g., showing an error message
-      return;
-    }
-    if (!projectSelected) {
-      console.error("No project selected");
-      // You can add user feedback here, e.g., showing an error message
-      return;
-    }
-    if (!selectedModel) {
-      console.error("No model selected");
-      // You can add user feedback here, e.g., showing an error message
-      return;
-    }
-    const formData = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      formData.append("files", files[i]);
-    }
-
-    formData.append("projectName", projectSelected);
-    formData.append("modelSelected", selectedModel);
-
-    console.log("FormData contents:");
-    for (let [key, value] of formData.entries()) {
-      console.log(key, value instanceof File ? `File: ${value.name}` : value);
-    }
-
-    try {
-      // console.log("file uploaded", formData.entries())
-      const response = await axios.post(
-        `http://${url_machine}/upload_file`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      toast.success(response.data.message, {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      handleCloseModal();
-      // console.log(response);
-      // You can add a success message or update the UI here
-    } catch (error) {
-      console.error("Error uploading file:", error);
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        console.error("Error data:", error.response.data);
-        console.error("Error status:", error.response.status);
-        console.error("Error headers:", error.response.headers);
-        toast.error("No file(s) selected. Please try again.", {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      } else if (error.request) {
-        // The request was made but no response was received
-        console.error("No response received:", error.request);
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        console.error("Error message:", error.message);
-      }
-    }
-  };
-
-  const handleFileClick = async (filename, project) => {
-    try {
-      const response = await axios.get(`http://${url_machine}/file/`, {
-        params: {
-          file_name: filename,
-          projectName: project,
-        },
-        responseType: "blob",
-      });
-
-      const blob = new Blob([response.data], { type: "application/pdf" });
-      const url = window.URL.createObjectURL(blob);
-      window.open(url, "_blank"); // Open the PDF in a new tab
-    } catch (error) {
-      setError(error.message);
-      console.log("Error: ", error.message);
-    }
-  };
-
-  const handleToggleReferences = () => {
-    setToggleReferences(!toggleReferences);
-  };
 
   const handleCancelGenerateApiCall = () => {
     // If there's an ongoing request, cancel it
@@ -395,18 +261,9 @@ const App = () => {
               onChange={(event) => setSelectedModel(event.target.value)}
               value={selectedModel}
             >
-              <option value="Llama">Llama</option>
-              <option value="GPT4ALL">GPT4ALL</option>
               <option value="OpenAI">OpenAI</option>
             </select>
           </div>
-
-          {/* <div className="dropdown-container">
-            <p style={{ fontSize: "14px" }}>Want to upload your document?</p>
-            <button className="btn" onClick={openPopUp}>
-              Upload file
-            </button>
-          </div> */}
 
           <h4>Recent Questions</h4>
 
@@ -449,14 +306,15 @@ const App = () => {
         <div className="main-container">
           <div className="navigator">
             <div className="logo_container">
-              <img
+              <Image
                 src={
                   theme == "light"
-                    ? "./images/shopwise-black-text.png"
-                    : "./images/shopwise-white-text-transparent-background.png"
+                    ? "/images/shopwise-black-text.png"
+                    : "/images/shopwise-white-text-transparent-background.png"
                 }
                 alt="valtech logo"
-                style={{ width: "100px" }}
+                width={180}
+                height={40}
               />
             </div>
             <div className="profile_section">
@@ -559,229 +417,6 @@ const App = () => {
                       </div>
                     </div>
 
-                    {chat?.references && chat?.references.length > 0 && (
-                      <div onClick={handleToggleReferences}>
-                        <h3
-                          className="question-answer-text"
-                          style={{ cursor: "pointer" }}
-                        >
-                          References &nbsp;{" "}
-                          {toggleReferences ? (
-                            <FontAwesomeIcon icon={faAngleUp} />
-                          ) : (
-                            <FontAwesomeIcon icon={faAngleDown} />
-                          )}
-                        </h3>
-                      </div>
-                    )}
-
-                    {toggleReferences &&
-                      chat?.references.length > 0 &&
-                      (() => {
-                        // Categorize the references based on their URL
-                        const categorizedReferences = {
-                          jira: [],
-                          confluence: [],
-                          incidents: [],
-                          others: [],
-                        };
-                        console.log("chat references: ", chat);
-                        if (chat?.references[0]?.source === "ServiceNow") {
-                          chat.references.forEach((reference) => {
-                            console.log("reference ", reference);
-                            if (reference.url.includes("jira")) {
-                              categorizedReferences.jira.push(reference);
-                            } else if (reference.url.includes("confluence")) {
-                              categorizedReferences.confluence.push(reference);
-                            } else if (reference.url.includes("service-now")) {
-                              categorizedReferences.incidents.push(reference);
-                            } else {
-                              categorizedReferences.others.push(reference);
-                            }
-                          });
-                        } else {
-                          chat.references.forEach((reference) => {
-                            if (reference.url.includes("jira")) {
-                              categorizedReferences.jira.push(reference);
-                            } else if (reference.url.includes("confluence")) {
-                              categorizedReferences.confluence.push(reference);
-                            } else if (reference.url.includes("service-now")) {
-                              categorizedReferences.incidents.push(reference);
-                            } else {
-                              categorizedReferences.others.push(reference);
-                            }
-                          });
-                        }
-
-                        return (
-                          <div>
-                            {/* Render Jira References */}
-                            {categorizedReferences.jira.length > 0 && (
-                              <div className="docTitles">
-                                <h4>Related Jira Tickets:</h4>
-                                {categorizedReferences.jira.map((reference) => (
-                                  <div
-                                    className="question-answer-text"
-                                    key={reference.url}
-                                  >
-                                    <div>
-                                      <a
-                                        href={reference.url}
-                                        target="_blank"
-                                        style={{
-                                          cursor: "pointer",
-                                          color: "var(--link-color)",
-                                        }}
-                                        onClick={() =>
-                                          handleFileClick(
-                                            reference,
-                                            chat?.selected_project
-                                          )
-                                        }
-                                      >
-                                        {reference.title}
-                                      </a>
-                                      {/* {reference.url.startsWith('https') && (
-                                      <FontAwesomeIcon
-                                        icon={copiedReference === reference.url ? faCheck : faCopy}
-                                        style={{ color: "var(--icon-color)", marginLeft: "15px", cursor: "pointer" }}
-                                        onClick={(e) => {
-                                          e.stopPropagation(); // Prevents the onClick of the parent div from being triggered
-                                          handleIconClick("Copy", reference.url);
-                                        }}
-                                        title={copiedReference === reference.url ? "Copied!" : "Copy link"}
-                                      />
-                                    )} */}
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-
-                            {/* Render Confluence References */}
-                            {categorizedReferences.confluence.length > 0 && (
-                              <div className="docTitles">
-                                <h4>Related Confluence Documents:</h4>
-                                {categorizedReferences.confluence.map(
-                                  (reference) => (
-                                    <div
-                                      className="question-answer-text"
-                                      key={reference.url}
-                                    >
-                                      <div>
-                                        <a
-                                          href={reference.url}
-                                          target="_blank"
-                                          style={{
-                                            cursor: "pointer",
-                                            color: "var(--link-color)",
-                                          }}
-                                          onClick={() =>
-                                            handleFileClick(
-                                              reference,
-                                              chat?.selected_project
-                                            )
-                                          }
-                                        >
-                                          {reference.title}
-                                        </a>
-                                        {/* {reference.url.startsWith('https') && (
-                                      <FontAwesomeIcon
-                                        icon={copiedReference === reference.url ? faCheck : faCopy}
-                                        style={{ color: "var(--icon-color)", marginLeft: "15px", cursor: "pointer" }}
-                                        onClick={(e) => {
-                                          e.stopPropagation(); // Prevents the onClick of the parent div from being triggered
-                                          handleIconClick("Copy", reference.url);
-                                        }}
-                                        title={copiedReference === reference.url ? "Copied!" : "Copy link"}
-                                      />
-                                    )} */}
-                                      </div>
-                                    </div>
-                                  )
-                                )}
-                              </div>
-                            )}
-
-                            {categorizedReferences.incidents.length > 0 && (
-                              <div className="docTitles">
-                                <h4>Service Now:</h4>
-                                {categorizedReferences.incidents.map(
-                                  (reference) => (
-                                    <div
-                                      className="question-answer-text"
-                                      key={reference.url}
-                                    >
-                                      <div>
-                                        <a
-                                          href={reference.url}
-                                          target="_blank"
-                                          style={{
-                                            cursor: "pointer",
-                                            color: "var(--link-color)",
-                                          }}
-                                          onClick={() =>
-                                            handleFileClick(
-                                              reference,
-                                              chat?.selected_project
-                                            )
-                                          }
-                                        >
-                                          {reference.title}
-                                        </a>
-                                      </div>
-                                    </div>
-                                  )
-                                )}
-                              </div>
-                            )}
-
-                            {/* Render Other References */}
-                            {categorizedReferences.others.length > 0 && (
-                              <div className="docTitles">
-                                <h4>Other Related Documents:</h4>
-                                {categorizedReferences.others.map(
-                                  (reference) => (
-                                    <div
-                                      className="question-answer-text"
-                                      key={reference.url}
-                                    >
-                                      <div
-                                        style={{
-                                          cursor: "pointer",
-                                          color: "var(--link-color)",
-                                        }}
-                                        onClick={() =>
-                                          handleFileClick(
-                                            reference,
-                                            chat?.selected_project
-                                          )
-                                        }
-                                      >
-                                        <a href={reference.url} target="_blank">
-                                          {reference.title}
-                                        </a>
-                                        {/* {reference.url.startsWith('https') && (
-                                      <FontAwesomeIcon
-                                        icon={copiedReference === reference.url ? faCheck : faCopy}
-                                        style={{ color: "var(--icon-color)", marginLeft: "15px", cursor: "pointer" }}
-                                        onClick={(e) => {
-                                          e.stopPropagation(); // Prevents the onClick of the parent div from being triggered
-                                          handleIconClick("Copy", reference.url);
-                                        }}
-                                        title={copiedReference === reference.url ? "Copied!" : "Copy link"}
-                                      />
-                                    )} */}
-                                      </div>
-                                    </div>
-                                  )
-                                )}
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })()}
-
                     <div className="chat-utility-icons-container">
                       <Stars
                         chat={chat}
@@ -840,9 +475,6 @@ const App = () => {
             ) : (
               <div className="initial-label">
                 <div>How can I help you today?</div>
-                {/* <div className="initial-message">
-                  {`You can ask anything related to ${projectSelected} here`}
-                </div> */}
               </div>
             )}
           </div>
@@ -878,59 +510,11 @@ const App = () => {
           </div>
         </div>
       </div>
-      <div>
-        {openUploadPopUp && (
-          <div className="feedback-modal-container">
-            <div className="modal">
-              {/* <form onSubmit={handleQuerySubmit}>
-            <input
-              type="text"
-              value={inputText}
-              className="input-box"
-              placeholder={`Ask anything from ${projectSelected} project...`}
-              onChange={(event) => setInputText(event.target.value)}
-              ref={inputBoxRef}
-            />
-          </form> */}
-              <h3 style={{ textAlign: "center" }}>
-                Upload File in {projectSelected} project
-              </h3>
-              <div className="inner-modal">
-                <form onSubmit={handleFileUpload} className="upload-form">
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    accept=".pdf,.doc,.docx"
-                    multiple
-                  />
-                  <div className="button-group">
-                    <button className="btn upload-btn" type="submit">
-                      Upload File
-                    </button>
-                    <button
-                      className="btn cancel-btn"
-                      type="button"
-                      onClick={handleCancel}
-                    >
-                      Cancel
-                    </button>
-                    <div className="close-feedback" onClick={handleCloseModal}>
-                      <FontAwesomeIcon icon={faClose} />
-                    </div>
-                  </div>
-                </form>
-              </div>
-              {/* <div className="disclaimer-text">
-            Disclaimer: This is an AI generated content and may be incorrect.
-          </div> */}
-            </div>
-          </div>
-        )}
-      </div>
+
       {showModal && (
         <UserNameModal
           onClose={() => setShowModal(false)}
-          onEmailSave={handleEmailSave}
+          onUserNameSave={handleUserName}
         />
       )}
     </>
