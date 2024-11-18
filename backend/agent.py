@@ -14,7 +14,7 @@ def create_dataframe_query_agent(selected_llm_model):
         selected_llm_model,
         [df1, df2],
         verbose=True,
-        agent_type="openai-functions",  
+        agent_type="zero-shot-react-description",  
         handle_parsing_errors=True,
         allow_dangerous_code=True 
     )
@@ -51,8 +51,8 @@ def generate_response(query: str, model_name: str):
         models = { 
               "OpenAI" : openai_llm,
               "Llama": llama_llm,
-              "GPT4All": gpt4all_llm,
-              "Mistral": mistral_llm}
+              "GPT4All": gpt4all_llm
+              }
 
         selected_llm_model = models[model_name]
         
