@@ -398,6 +398,8 @@ const App = () => {
             >
               <option value="OpenAI">OpenAI</option>
               <option value="Mistral">Mistral</option>
+              <option value="Llama">Llama</option>
+              <option value="GPT4All">GPT4All</option>
             </select>
           </div>
 

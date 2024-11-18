@@ -3,7 +3,6 @@ langchain-experimental
 langchain-openai
 langchain-community 
 gpt4all
-llama-cpp-python
 fastapi
 ctransformers
 ctransformers[cuda]

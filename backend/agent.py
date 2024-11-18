@@ -51,7 +51,8 @@ def generate_response(query: str, model_name: str):
         models = { 
               "OpenAI" : openai_llm,
               "Llama": llama_llm,
-              "GPT4All": gpt4all_llm}
+              "GPT4All": gpt4all_llm,
+              "Mistral": mistral_llm}
 
         selected_llm_model = models[model_name]
         
