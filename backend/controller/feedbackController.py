@@ -3,9 +3,6 @@ from fastapi import APIRouter, Response
 import json,os
 from pydantic import BaseModel
 from pymongo import MongoClient
-from datetime import datetime
-from typing import Optional
-from fastapi.responses import FileResponse
 from bson import ObjectId
 from dotenv import load_dotenv
 load_dotenv()
@@ -19,7 +16,7 @@ collection = db["shopwise_collection"]
 
 class FeedbackData(BaseModel):
     stars_given: int = 0
-    feedback: Optional[str] = None
+    # feedback: Optional[str] = None
     # name: Optional[str] = None
 
 @feedbackRouter.put('/submit_feedback')
@@ -27,15 +24,14 @@ def submit_feedback(feedback_data: FeedbackData, _id: str):
     try:
         print("in feedback controller")
         print("feedback data :", feedback_data)
-        collection_name = collection
-        feedback_collection = db[collection_name]
+
+        feedback_collection = collection
 
         print("feedback given!\n")
 
         query = {"_id": ObjectId(_id)}
         new_values = {
             "$set": {
-                "feedback": feedback_data.feedback,
                 "stars_given": feedback_data.stars_given
             }
         }
