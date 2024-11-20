@@ -20,19 +20,7 @@ After using create_csv_agent, it automatically parses the CSV file and analyzes 
 
 Below is comparison table for agents made during decision making.
 
-<html lang="en">
-<head>
-    <title>Comparison Table</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 18px;
-            text-align: left;
-        }
-    </style>
-</head>
+<html>
 <body>
     <h2>Feature Comparison Table</h2>
     <table>
