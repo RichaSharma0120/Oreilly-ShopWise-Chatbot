@@ -22,7 +22,6 @@ Below is comparison table for agents made during decision making.
 
 <html lang="en">
 <head>
-<head>
     <title>Comparison Table</title>
     <style>
         table {
