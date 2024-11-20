@@ -49,3 +49,10 @@ Setup Complexity	                  Minimal	      Moderate	        Moderate
 | Ideal for Non-Technical Users | Yes | No | No |
 
 | Setup Complexity | Minimal | Moderate | Moderate |
+
+
+<table>
+    <tr>
+        <td>Foo</td>
+    </tr>
+</table>
