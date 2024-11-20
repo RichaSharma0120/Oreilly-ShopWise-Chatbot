@@ -29,3 +29,23 @@ Advanced Data Analysis	              Basic	          Advanced	        Advanced
 Integration with Pandas	              No	          Yes	            Yes
 Ideal for Non-Technical Users	      Yes	          No	            No
 Setup Complexity	                  Minimal	      Moderate	        Moderate
+
+
+
+| Feature | create_csv_agent | Pandas AI | LangChain's pandas_data_agent |
+
+|---|---|---|---|
+
+| Ease of Use | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
+
+| Data Preprocessing | Limited | Extensive | Extensive |
+
+| Direct CSV File Support | Yes | No | No |
+
+| Advanced Data Analysis | Basic | Advanced | Advanced |
+
+| Integration with Pandas | No | Yes | Yes |
+
+| Ideal for Non-Technical Users | Yes | No | No |
+
+| Setup Complexity | Minimal | Moderate | Moderate |
