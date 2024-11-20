@@ -20,39 +20,8 @@ After using create_csv_agent, it automatically parses the CSV file and analyzes 
 
 Below is comparison table for agents made during decision making.
 
-Feature	                    	create_csv_agent	Pandas AI	LangChain's pandas_data_agent
-
-Ease of Use	                        ⭐⭐⭐⭐⭐	  ⭐⭐⭐	        ⭐⭐⭐
-Data Preprocessing	                 Limited	      Extensive	        Extensive
-Direct CSV File Support	              Yes	          No 	            No
-Advanced Data Analysis	              Basic	          Advanced	        Advanced
-Integration with Pandas	              No	          Yes	            Yes
-Ideal for Non-Technical Users	      Yes	          No	            No
-Setup Complexity	                  Minimal	      Moderate	        Moderate
-
-
-
-| Feature | create_csv_agent | Pandas AI | LangChain's pandas_data_agent |
-
-|---|---|---|---|
-
-| Ease of Use | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
-
-| Data Preprocessing | Limited | Extensive | Extensive |
-
-| Direct CSV File Support | Yes | No | No |
-
-| Advanced Data Analysis | Basic | Advanced | Advanced |
-
-| Integration with Pandas | No | Yes | Yes |
-
-| Ideal for Non-Technical Users | Yes | No | No |
-
-| Setup Complexity | Minimal | Moderate | Moderate |
-
-
-<!DOCTYPE html>
 <html lang="en">
+<head>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +49,7 @@ Setup Complexity	                  Minimal	      Moderate	        Moderate
             background-color: #f1f1f1;
         }
         td {
-            text-align: center;
+            text-align: left; /* Changed to align text to the left */
         }
     </style>
 </head>
