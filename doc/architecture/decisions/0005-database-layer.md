@@ -29,8 +29,7 @@ Applications related to financial systems or enterprise applications.
 How MongoDB Helps in LLM based applications:
 
 1) Storing Chat History & Conversations	    
-MongoDB can efficiently store user conversations, chat history, and interaction logs as documents, enabling quick 
-retrieval and context management for LLMs.
+MongoDB can efficiently store user conversations, chat history, and interaction logs as documents, enabling quick retrieval and context management for LLMs.
 
 2) Caching LLM Responses	
 You can use MongoDB to cache frequently accessed LLM responses, reducing response times and improving overall system performance.
