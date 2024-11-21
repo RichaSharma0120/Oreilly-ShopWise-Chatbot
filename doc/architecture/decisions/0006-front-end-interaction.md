@@ -19,16 +19,66 @@ We decided to implement in Next.JS programming language as it is a excellent cho
 Next.js has a large and active community, extensive documentation making it a stable and well-supported choice.
 
 
-Main comparisons between Next.JS and Nuxt.JS and Gatsby	                               
+                              
 
-Dynamic Routing  	
-
-Next.js	 Built-in support 	
-Nuxt.js	 File-based routing with dynamic segments	
-Gatsby	 Limited (static routes preferred)	
-
-Scalability	
-
-Next.js	 Highly scalable with support for both SSR and ISR	
-Nuxt.js	 File-based routing with dynamic segments	
-Gatsby	 Not ideal for highly dynamic content
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main comparisons between Next.JS and Nuxt.JS and Gatsby</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        td {
+            text-align: left; /* Align text to the left */
+        }
+    </style>
+</head>
+<body>
+    <h2>Framework Comparison Table</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Next.js</th>
+                <th>Nuxt.js</th>
+                <th>Gatsby</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Dynamic Routing</td>
+                <td>Built-in support</td>
+                <td>File-based routing with dynamic segments</td>
+                <td>Limited (static routes preferred)</td>
+            </tr>
+            <tr>
+                <td>Scalability</td>
+                <td>Highly scalable with support for both SSR and ISR</td>
+                <td>File-based routing with dynamic segments</td>
+                <td>Not ideal for highly dynamic content</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
