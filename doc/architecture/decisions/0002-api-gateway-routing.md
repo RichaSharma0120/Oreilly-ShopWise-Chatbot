@@ -20,5 +20,6 @@ After implementing FastApi our apis are performing faster as they do asynchronou
 
 Which to Use and When?
 
-FastAPI is ideal for modern, performance-oriented applications that require speed, concurrency, and robust data validation.
-Flask is a lightweight, flexible framework suited for simpler, traditional web applications where rapid prototyping and minimal setup are priorities.
+1) FastAPI is ideal for modern, performance-oriented applications that require speed, concurrency, and robust data validation.
+
+2) Flask is a lightweight, flexible framework suited for simpler, traditional web applications where rapid prototyping and minimal setup are priorities.
