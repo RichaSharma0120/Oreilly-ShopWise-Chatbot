@@ -22,6 +22,12 @@ Vast community of developers, resources, tutorials, and pre-built integrations a
 
 However some cons of using gpt are as follows:
 
- It's expensive, especially for large-scale usage, making it less suitable for budget-constrained projects. The model operates as a black box, limiting control and customization, and while some fine-tuning is possible, it isn't as flexible as open-source alternatives. 
- GPT models can also produce inaccurate or biased responses, sometimes generating misleading information confidently. 
- Additionally, using OpenAI's API raises data privacy concerns, especially for sensitive information, and applications can face rate limits and latency issues, which may impact performance during high demand. These factors require careful consideration, especially for projects that prioritize cost efficiency, control, and data security.
+ 1) It's expensive, especially for large-scale usage, making it less suitable for budget-constrained projects.
+ 
+ 2) The model operates as a black box, limiting control and customization, and while some fine-tuning is possible, it isn't as flexible as open-source alternatives.
+
+ 3) GPT models can also produce inaccurate or biased responses, sometimes generating misleading information confidently. 
+
+ 4) OpenAI's API raises data privacy concerns, especially for sensitive information, and applications can face rate limits and latency issues, which may impact performance during high demand. 
+ 
+ These factors require careful consideration, especially for projects that prioritize cost efficiency, control, and data security.
