@@ -16,18 +16,13 @@ collection = db["shopwise_collection"]
 
 class FeedbackData(BaseModel):
     stars_given: int = 0
-    # feedback: Optional[str] = None
-    # name: Optional[str] = None
 
 @feedbackRouter.put('/submit_feedback')
 def submit_feedback(feedback_data: FeedbackData, _id: str):
     try:
-        print("in feedback controller")
-        print("feedback data :", feedback_data)
-
         feedback_collection = collection
 
-        print("feedback given!\n")
+        print("feedback submitted!\n")
 
         query = {"_id": ObjectId(_id)}
         new_values = {
