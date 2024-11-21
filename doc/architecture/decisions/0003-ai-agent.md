@@ -20,12 +20,62 @@ After using create_csv_agent, it automatically parses the CSV file and analyzes 
 
 Below is comparison table for agents made during decision making.
 
-Feature	                    	create_csv_agent	Pandas AI	LangChain's pandas_data_agent
-
-Ease of Use	                        ⭐⭐⭐⭐⭐	  ⭐⭐⭐	        ⭐⭐⭐
-Data Preprocessing	                 Limited	      Extensive	        Extensive
-Direct CSV File Support	              Yes	          No 	            No
-Advanced Data Analysis	              Basic	          Advanced	        Advanced
-Integration with Pandas	              No	          Yes	            Yes
-Ideal for Non-Technical Users	      Yes	          No	            No
-Setup Complexity	                  Minimal	      Moderate	        Moderate
+<html>
+<body>
+    <h2>Feature Comparison Table</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>create_csv_agent</th>
+                <th>Pandas AI</th>
+                <th>LangChain's pandas_data_agent</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ease of Use</td>
+                <td>⭐⭐⭐⭐⭐</td>
+                <td>⭐⭐⭐</td>
+                <td>⭐⭐⭐</td>
+            </tr>
+            <tr>
+                <td>Data Preprocessing</td>
+                <td>Limited</td>
+                <td>Extensive</td>
+                <td>Extensive</td>
+            </tr>
+            <tr>
+                <td>Direct CSV File Support</td>
+                <td>Yes</td>
+                <td>No</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Advanced Data Analysis</td>
+                <td>Basic</td>
+                <td>Advanced</td>
+                <td>Advanced</td>
+            </tr>
+            <tr>
+                <td>Integration with Pandas</td>
+                <td>No</td>
+                <td>Yes</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Ideal for Non-Technical Users</td>
+                <td>Yes</td>
+                <td>No</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Setup Complexity</td>
+                <td>Minimal</td>
+                <td>Moderate</td>
+                <td>Moderate</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
