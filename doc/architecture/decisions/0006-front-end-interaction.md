@@ -23,39 +23,8 @@ Next.js has a large and active community, extensive documentation making it a st
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main comparisons between Next.JS and Nuxt.JS and Gatsby</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 18px;
-            text-align: left;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        th {
-            background-color: #f2f2f2;
-            text-align: center;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        td {
-            text-align: left; /* Align text to the left */
-        }
-    </style>
-</head>
 <body>
-    <h2>Framework Comparison Table</h2>
+    <h2>Main comparisons between Next.JS and Nuxt.JS and Gatsby</h2>
     <table>
         <thead>
             <tr>
