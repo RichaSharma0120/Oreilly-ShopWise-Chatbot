@@ -4,7 +4,7 @@ ShopWise is an intelligent, context-aware chatbot designed to help users query C
 
 ### Access the website on this url : https://talktodata.valtech.co.in/
 ### Documentation can also be accessed on https://github.com/Valtech-AIML-Team/Oreilly-ShopWise-Chatbot/blob/master/ShopWise%20ChatBot%20Details.pdf
-### All ADRs can be accessed on [https://github.com/Valtech-AIML-Team/Oreilly-ShopWise-Chatbot/blob/master/ShopWise%20ChatBot%20Details.pdf](https://github.com/Valtech-AIML-Team/Oreilly-ShopWise-Chatbot/tree/master/doc/architecture/decisions)
+### All ADRs can be accessed on https://github.com/Valtech-AIML-Team/Oreilly-ShopWise-Chatbot/tree/master/doc/architecture/decisions
 
 ## Key features of ShopWise include:
 
