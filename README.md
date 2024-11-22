@@ -57,6 +57,9 @@ ShopWise is a versatile tool designed for users who need quick, reliable insight
 2. With the steps above, the backend will be running locally (usually at http://127.0.0.1:8000), and the frontend will be accessible at the development server URL provided in the terminal (typically http://localhost:3000).
 
 
+## Future Roadmaps:
+1. Apart from current OpenAI llm, other alternative llms can be used by having a dropdown containing all llms in header section.
+2. Dashboard can be created for creating graphs and charts based on orders and products for data analysis.
 
 
 
