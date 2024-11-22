@@ -505,7 +505,7 @@ const App = () => {
               />
             </form>
             <div className="disclaimer-text">
-              Disclaimer: This is an AI generated content and may be incorrect.
+              Disclaimer: This is an AI generated content. Please double-check responses.
             </div>
           </div>
         </div>
