@@ -23,16 +23,17 @@ class QuestionAnswer(BaseModel):
     _id: ObjectId
     question: str
     answer: str
+    modelName: str
     stars_given: int = 0
     created_at: datetime
     name: Optional[str] = None
 
 @generateAnswerRouter.post('/generate_answer')
-async def generate_answer(queryText: str, name: str = None, modelName: str = None):
+async def generate_answer(queryText: str, name: str = None, modelName: str = None, sessionId: str = None):
     try:
         print("\nin try block of generate answer controller")
         # answer = generate_response(queryText, modelName)
-        answer = generate_response(queryText, modelName)
+        answer = generate_response(queryText, modelName, sessionId)
         
         ist_timezone = pytz.timezone('Asia/Kolkata')
         current_time_ist = datetime.now(timezone.utc).astimezone(ist_timezone)
@@ -45,6 +46,7 @@ async def generate_answer(queryText: str, name: str = None, modelName: str = Non
             answer=answer["main_answer"],
             stars_given=answer["rating"],
             name=name,
+            modelName=modelName,
             _id=ObjectId(),
             created_at=current_time_naive
         )

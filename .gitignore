@@ -164,3 +164,4 @@ frontend/next.config.mjs
 frontend/.next/
 frontend/node_modules/
 
+backend/session_data/

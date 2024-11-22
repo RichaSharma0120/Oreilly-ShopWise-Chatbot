@@ -29,7 +29,7 @@ const generateSessionId = () => {
 const App = () => {
   const url_machine = process.env.NEXT_PUBLIC_URL;
 
-  const [sessionId, setSessionId] = useState(""); 
+  const [sessionId, setSessionId] = useState("");
   const [inputText, setInputText] = useState("");
   const [chatData, setChatData] = useState([]);
   const [copiedReference, setCopiedReference] = useState(null);
@@ -192,7 +192,8 @@ const App = () => {
         let queryParams = {
           queryText: inputText,
           name: userName,
-          modelName: selectedModel
+          modelName: selectedModel,
+          sessionId: sessionId
         };
         console.log(queryParams);
         let url = `http://${url_machine}/generate_answer`;
@@ -378,7 +379,7 @@ const App = () => {
                         {chat?.main_answer && (
                           <>
                             {chat.main_answer
-                              .split(/(?<=\.)\s*(?=\d+\.)/)
+                              .split(/(?<=\.)\s+(?=\d+\.)/) // Updated regex to check for a space after the period
                               .map((paragraph, index) => {
                                 const lines = paragraph
                                   .split(/\n/)
@@ -386,9 +387,8 @@ const App = () => {
                                   .filter((line) => line);
 
                                 return lines.map((line, lineIndex) => {
-                                  const bulletMatch =
-                                    line.match(/^(\d+\.)\s*(.*)/);
-                                  
+                                  const bulletMatch = line.match(/^(\d+\.)\s*(.*)/);
+
                                   const formattedText = line.replace(
                                     /\*\*(.+?)\*\*/g,
                                     "<strong>$1</strong>"
