@@ -2,6 +2,8 @@
 
 ShopWise is an intelligent, context-aware chatbot designed to help users query CSV files and retrieve relevant information efficiently. This application empowers users by providing instant answers based on the data in the provided CSV files, ensuring accurate and contextual responses tailored to their queries.
 
+### Access the website on this url : https://talktodata.valtech.co.in/
+
 ## Key features of ShopWise include:
 
 - CSV Querying: Users can upload CSV files and perform natural language queries to extract meaningful insights.
